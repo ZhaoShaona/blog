@@ -1,0 +1,228 @@
+MongoError: server localhost:27017 timed out
+   at null.<anonymous> (D:\blog\node_modules\mongodb\node_modules\mongodb-cor
+ib\topologies\server.js:308:47)
+   at g (events.js:260:16)
+   at emitTwo (events.js:87:13)
+   at emit (events.js:172:7)
+   at null.<anonymous> (D:\blog\node_modules\mongodb\node_modules\mongodb-cor
+ib\connection\pool.js:93:12)
+   at g (events.js:260:16)
+   at emitTwo (events.js:87:13)
+   at emit (events.js:172:7)
+   at Socket.<anonymous> (D:\blog\node_modules\mongodb\node_modules\mongodb-c
+\lib\connection\connection.js:133:10)
+   at Socket.g (events.js:260:16)
+   at emitNone (events.js:67:13)
+
+
+
+
+
+500 TypeError: Cannot read property 'file2' of undefined
+
+       at D:\blog\routes\index.js:157:39
+       at callbacks (D:\blog\node_modules\express\lib\router\index.js:164:37)
+       at param (D:\blog\node_modules\express\lib\router\index.js:138:11)
+       at pass (D:\blog\node_modules\express\lib\router\index.js:145:5)
+       at Router._dispatch (D:\blog\node_modules\express\lib\router\index.js:173:5)
+       at Object.router (D:\blog\node_modules\express\lib\router\index.js:33:10)
+       at next (D:\blog\node_modules\express\node_modules\connect\lib\proto.js:174:15)
+       at MongoStore.<anonymous> (D:\blog\node_modules\express\node_modules\connect\node_modules\express-session\index.js:433:7)
+       at MongoStore.tryCatcher (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\util.js:11:23)
+       at Promise.successAdapter [as _fulfillmentHandler0] (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\nodeify.js:23:30)
+       at Promise._settlePromise (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\promise.js:543:21)
+       at Promise._settlePromise0 (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\promise.js:591:10)
+       at Promise._settlePromises (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\promise.js:674:18)
+       at Promise._fulfill (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\promise.js:615:18)
+       at Promise._resolveCallback (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\promise.js:416:57)
+       at Promise._settlePromiseFromHandler (D:\blog\node_modules\connect-mongo\node_modules\bluebird\js\release\promise.js:502:17)
+
+
+TypeError: Cannot read property 'slice' of null
+    at convert_tree_to_html (D:\blog\node_modules\markdown\lib\markdown.js:1556:
+20)
+    at Object.toHTMLTree (D:\blog\node_modules\markdown\lib\markdown.js:112:14)
+    at Object.toHTML (D:\blog\node_modules\markdown\lib\markdown.js:82:22)
+    at D:\blog\models\post.js:84:26
+    at Array.forEach (native)
+    at D:\blog\models\post.js:83:10
+    at handleCallback (D:\blog\node_modules\mongodb\lib\utils.js:96:12)
+    at D:\blog\node_modules\mongodb\lib\cursor.js:849:16
+    at handleCallback (D:\blog\node_modules\mongodb\node_modules\mongodb-core\li
+b\cursor.js:244:5)
+    at setCursorDeadAndNotified (D:\blog\node_modules\mongodb\node_modules\mongo
+db-core\lib\cursor.js:553:3)
+    at nextFunction (D:\blog\node_modules\mongodb\node_modules\mongodb-core\lib\
+cursor.js:732:7)
+    at Cursor.next [as _next] (D:\blog\node_modules\mongodb\node_modules\mongodb
+-core\lib\cursor.js:773:3)
+    at fetchDocs (D:\blog\node_modules\mongodb\lib\cursor.js:845:10)
+    at D:\blog\node_modules\mongodb\lib\cursor.js:868:7
+    at handleCallback (D:\blog\node_modules\mongodb\node_modules\mongodb-core\li
+b\cursor.js:244:5)
+    at nextFunction (D:\blog\node_modules\mongodb\node_modules\mongodb-core\lib\
+cursor.js:763:5)
+删除了数据后重启
+
+
+
+
+User.prototype.save = function(callback) {
+	var user = {
+		name: this.name,
+		password: this.password,
+		email: this.email
+	};
+	//打开数据库
+	mongodb.open(function (err, db) {
+    	if (err) {
+    		return callback(err);
+    	}
+    	//读取users集合
+    	db.collection('users', function (err, collection) {
+    		if (err) {
+    			mongodb.close();
+    			return callback(err);
+    		}
+    		//将数据插入用户集合
+    		collection.insert(user, {
+    			safe: true
+    		}, function (err, user) {
+    			mongodb.close();
+    			if (err) {
+    				return callback(err);
+    			}
+    			callback(null, user[0]);//user[0] 是null ， 改为user后有数据
+    		});
+    	});
+	});
+};
+
+user[0] 是null ， 改为user后有数据
+{ result: { ok: 1, n: 1 },
+  ops:
+   [ { name: '2',
+       password: 'c81e728d9d4c2f636f067f89cc14862c',
+       email: '123@qq.com',
+       _id: '5694730e43261b5415179c5f' } ],
+  insertedCount: 1,
+  insertedIds: [ '5694730e43261b5415179c5f' ] }
+
+最后改为了user.ops[0] 
+
+
+:\blog\node_modules\mongodb\lib\utils.js:98
+   process.nextTick(function() { throw err; });
+                                 ^
+
+ypeError: Cannot read property 'slice' of null
+   at convert_tree_to_html (D:\blog\node_modules\markdown\lib\markdown.js:1556:
+0)
+   at Object.toHTMLTree (D:\blog\node_modules\markdown\lib\markdown.js:112:14)
+   at Object.toHTML (D:\blog\node_modules\markdown\lib\markdown.js:82:22)
+   at D:\blog\models\post.js:85:26
+   at Array.forEach (native)
+   at D:\blog\models\post.js:84:10
+   at handleCallback (D:\blog\node_modules\mongodb\lib\utils.js:96:12)
+   at D:\blog\node_modules\mongodb\lib\cursor.js:849:16
+   at handleCallback (D:\blog\node_modules\mongodb\node_modules\mongodb-core\li
+\cursor.js:244:5)
+   at setCursorDeadAndNotified (D:\blog\node_modules\mongodb\node_modules\mongo
+b-core\lib\cursor.js:553:3)
+   at nextFunction (D:\blog\node_modules\mongodb\node_modules\mongodb-core\lib\
+ursor.js:732:7)
+   at Cursor.next [as _next] (D:\blog\node_modules\mongodb\node_modules\mongodb
+core\lib\cursor.js:773:3)
+   at fetchDocs (D:\blog\node_modules\mongodb\lib\cursor.js:845:10)
+   at D:\blog\node_modules\mongodb\lib\cursor.js:868:7
+   at handleCallback (D:\blog\node_modules\mongodb\node_modules\mongodb-core\li
+\cursor.js:244:5)
+   at nextFunction (D:\blog\node_modules\mongodb\node_modules\mongodb-core\lib\
+ursor.js:763:5)
+Program node app exited with code 1
+
+update 更新的内容传进去空
+
+
+
+(node) warning: possible EventEmitter memory leak detected. 11 reconnect listene
+rs added. Use emitter.setMaxListeners() to increase limit.
+Trace
+    at addListener (events.js:239:17)
+    at Server.connect (d:\blog\node_modules\mongodb\lib\server.js:300:17)
+    at open (d:\blog\node_modules\mongodb\lib\db.js:217:19)
+    at Db.open (d:\blog\node_modules\mongodb\lib\db.js:240:44)
+    at Function.Post.getOne (d:\blog\models\post.js:102:10)
+    at d:\blog\routes\index.js:173:14
+    at callbacks (d:\blog\node_modules\express\lib\router\index.js:164:37)
+    at param (d:\blog\node_modules\express\lib\router\index.js:138:11)
+    at param (d:\blog\node_modules\express\lib\router\index.js:135:11)
+    at param (d:\blog\node_modules\express\lib\router\index.js:135:11)
+    at param (d:\blog\node_modules\express\lib\router\index.js:135:11)
+    at pass (d:\blog\node_modules\express\lib\router\index.js:145:5)
+    at Router._dispatch (d:\blog\node_modules\express\lib\router\index.js:173:5)
+
+    at Object.router (d:\blog\node_modules\express\lib\router\index.js:33:10)
+    at next (d:\blog\node_modules\express\node_modules\connect\lib\proto.js:174:
+15)
+    at MongoStore.<anonymous> (d:\blog\node_modules\express\node_modules\connect
+\node_modules\express-session\index.js:433:7)
+分页 跳到下一页有问题
+D:\blog\node_modules\mongodb\lib\gridfs-stream\index.js:里面修改
+this.setMaxListeners(11); 
+
+
+
+
+
+
+
+TypeError: d:\blog\views\article.ejs:2
+    1| <%- include header%>
+ >> 2|  <%if (user && (user.name == post.name)) {%>
+    3|  <span><a class="edit" href="/edit/<%=post.name%>/<%=post.time.day%>/<%=p
+ost.title%>">编辑</a></span>
+    4|  <span><a class="edit" href="/remove/<%=post.name%>/<%=post.time.day%>/<%
+=post.title%>">删除</a></span>
+    5|  <%}%>
+
+Cannot read property 'name' of undefined
+    at eval (eval at <anonymous> (d:\blog\node_modules\ejs\lib\ejs.js:464:12), <
+anonymous>:45:37)
+    at returnedFn (d:\blog\node_modules\ejs\lib\ejs.js:493:17)
+    at View.exports.renderFile [as engine] (d:\blog\node_modules\ejs\lib\ejs.js:
+350:31)
+    at View.render (d:\blog\node_modules\express\lib\view.js:76:8)
+    at Function.app.render (d:\blog\node_modules\express\lib\application.js:561:
+10)
+    at ServerResponse.res.render (d:\blog\node_modules\express\lib\response.js:8
+45:7)
+    at d:\blog\routes\index.js:203:17
+    at d:\blog\models\post.js:143:14
+    at handleCallback (d:\blog\node_modules\mongodb\lib\utils.js:96:12)
+    at d:\blog\node_modules\mongodb\lib\collection.js:987:5
+    at d:\blog\node_modules\mongodb\node_modules\mongodb-core\lib\topologies\ser
+ver.js:780:13
+    at Callbacks.emit (d:\blog\node_modules\mongodb\node_modules\mongodb-core\li
+b\topologies\server.js:95:3)
+    at null.messageHandler (d:\blog\node_modules\mongodb\node_modules\mongodb-co
+re\lib\topologies\server.js:249:23)
+    at Socket.<anonymous> (d:\blog\node_modules\mongodb\node_modules\mongodb-cor
+e\lib\connection\connection.js:265:22)
+    at emitOne (events.js:77:13)
+    at Socket.emit (events.js:169:7)
+
+
+
+
+
+
+
+
+
+
+
+
+<%if (post.reprint_info.reprint_from) {%>
+		<br/><a href="/u/<%= post.reprint_info.reprint_from.name%>/<%=post.reprint_info.reprint_from.day%>/<%=post.reprint_info.reprint_from.title%>">原文链接</a>
+	<%}%>
